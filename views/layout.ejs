@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <% if(!currentUser) { %>
+          <li><a href="/auth/signUp">Sign Up</a></li>
+          <li><a href="/auth/logIn">Log In</a></li>
+        <% } else { %>
+          <li><a href="/auth/logOut">Log Out</a></li>
+          <li><a href="/profile">Profile</a></li>
+        <% } %>
+      </ul>
+    </nav>
+  </header>
+  <%- include('partials/alerts') %> 
+  <%- body %> 
+</body>
+</html>
