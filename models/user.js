@@ -12,7 +12,11 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      models.users.belongsToMany(models.exercise, {through: 'userExercise'})
+      models.user.hasMany(models.comments)
+      models.users.hasMany(models.exerciseComment)
+      models.users.hasMany(models.userWorkouts)
+      models.users.hasMany(models.workoutComment)
     }
   };
   user.init({
