@@ -13,11 +13,13 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // models.users.belongsToMany(models.exercise, {through: 'userExercise'})
-      models.users.belongsToMany(models.userExercise, {foreignKey: 'userId'})
-      models.users.belongsToMany(models.exerciseComment, {foreignKey: 'userId'})
-      models.users.belongsToMany(models.comments, {foreignKey: 'userId'})
-      models.users.belongsToMany(models.userWorkouts, {foreignKey: 'userId'})
-      models.users.belongsToMany(models.workoutComment, {foreignKey: 'userId'})
+      models.users.hasMany(models.userExercise, {foreignKey: 'userId'})
+      models.users.hasMany(models.exerciseComment, {foreignKey: 'userId'})
+      models.users.hasMany(models.comments, {foreignKey: 'userId'})
+      models.users.hasMany(models.userWorkouts, {foreignKey: 'userId'})
+      models.users.hasMany(models.workoutComment, {foreignKey: 'userId'})
+      models.users.hasMany(models.workouts)
+      models.users.hasMany(models.exercises)
     }
   };
   user.init({
