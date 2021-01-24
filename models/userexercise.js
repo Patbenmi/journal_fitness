@@ -14,7 +14,6 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       models.userExercise.belongsTo(models.users)
       models.userExercise.belongsTo(models.exercise)
-
     }
   };
   userExercise.init({
