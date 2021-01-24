@@ -34,6 +34,7 @@ app.use((req, res, next) =>{
 // controller middleware
 app.use('/auth', require('./controllers/auth'))
 app.use('/exercise', require('./controllers/exercise'))
+app.use('/workout', require('./controllers/workout'))
 
 app.get('/', (req, res) =>{
   // if(req.user){
