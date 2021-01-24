@@ -11,9 +11,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      models.workouts.belongsTo(models.user, {through: 'userworkout'})
-      models.workouts.hasMany(models.exercise)
-      models.workouts.hasMany(models.workoutcomment, {through: 'userworkout'})
+      // models.workouts.belongsTo(models.user, {through: 'userworkout'})
+      // models.workouts.belongsToMany(models.exercise)
+      // models.workouts.belongsToMany(models.workoutcomment, {through: 'userworkout'})
     }
   };
   workouts.init({

@@ -15,7 +15,10 @@ router.post('/signup', (req, res) =>{
       email: req.body.email
     },
     defaults:{
-      name: req.body.name,
+      name_first: req.body.name_first,
+      name_last: req.body.name_last,
+      gender: req.body.gender,
+      language: req.body.language,
       password: req.body.password
     }
   })

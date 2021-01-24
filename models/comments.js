@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       models.comments.belongsTo(models.exercise, {through: 'exercisecomment'})
-      models.comments.belongsTo(models.users, {through: 'exercisecomment'})
+      // models.comments.belongsTo(models.users, {through: 'exercisecomment'})
     }
   };
   comments.init({

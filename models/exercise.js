@@ -12,8 +12,8 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       models.exercise.belongsToMany(models.user, {through: 'userexercise'})
-      models.exercise.hasManyy(models.comments, {through: 'exercisecomment'})
-      models.exercise.belongsToMany(models.workouts)
+      models.exercise.belongsToMany(models.comments, {through: 'exercisecomment'})
+      models.exercise.belongsToMany(models.workouts, {through: 'exerciseworkout'})
     }
   };
   exercise.init({

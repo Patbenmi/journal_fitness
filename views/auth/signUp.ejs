@@ -1,10 +1,27 @@
 <h1>Sign-Up</h1>
 
 <form action="/auth/signup" method="POST">
-  <lable  for="new-name">Name</lable>
-  <input type="text" name="name" id="new-name">
+  <lable  for="new-name_first">First Name</lable>
+  <input type="text" name="name_first" id="new-name_first">
 
-  <label for="new-email">Email Address</label>
+  <lable  for="new-name_last">Last Name</lable>
+  <input type="text" name="name_last" id="new-name_last">
+
+  <lable  for="new-gender">Gender:</lable>
+  <lable for="new-male">Male</lable>
+  <input type="radio" name="gender" id="new-male">
+  <lable for="new-nonbinary">Non-Binary</lable>
+  <input type="radio" name="gender" id="new-nonbinary">
+  <label for="new-female">Female</label>
+  <input type="radio" name="gender" id="new-female">
+
+  <label for="new-language">Language:</label>
+  <lable for="new-english">English</lable>
+  <input type="radio" name="language" id="new-english">
+  <label for="new-german">Deutsch</label>
+  <input type="radio" name="language" id="new-german">
+
+  <label for="new-language">Email Address</label>
   <input type="email" name="email" for="new-email">
 
   <label for="new-password">Password</label>
