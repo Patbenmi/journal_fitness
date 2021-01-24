@@ -21,7 +21,37 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   user.init({
-    name: {
+    name_first: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: {
+          arg: [2, 25],
+          msg: 'Name must be between 2 and 25 characters long.'
+        }
+      }
+    },
+    name_last: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: {
+          arg: [2, 25],
+          msg: 'Name must be between 2 and 25 characters long.'
+        }
+      }
+    },
+    gender: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: {
+          arg: [2, 25],
+          msg: 'Name must be between 2 and 25 characters long.'
+        }
+      }
+    },
+    language: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
