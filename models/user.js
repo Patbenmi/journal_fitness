@@ -12,11 +12,12 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      models.users.belongsToMany(models.exercise, {through: 'userExercise'})
-      models.user.hasMany(models.comments)
-      models.users.hasMany(models.exerciseComment)
-      models.users.hasMany(models.userWorkouts)
-      models.users.hasMany(models.workoutComment)
+      // models.users.belongsToMany(models.exercise, {through: 'userExercise'})
+      models.users.belongsToMany(models.userExercise, {foreignKey: 'userId'})
+      models.users.belongsToMany(models.exerciseComment, {foreignKey: 'userId'})
+      models.users.belongsToMany(models.comments, {foreignKey: 'userId'})
+      models.users.belongsToMany(models.userWorkouts, {foreignKey: 'userId'})
+      models.users.belongsToMany(models.workoutComment, {foreignKey: 'userId'})
     }
   };
   user.init({
