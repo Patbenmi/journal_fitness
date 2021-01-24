@@ -12,8 +12,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      models.userExercise.belongsTo(exercise)
-      models.userExercise.belongsTo(users)
+      models.userExercise.belongsTo(models.users)
+      models.userExercise.belongsTo(models.exercise)
+
     }
   };
   userExercise.init({
