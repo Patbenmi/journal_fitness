@@ -20,6 +20,7 @@ module.exports = (sequelize, DataTypes) => {
     exerciseName: DataTypes.STRING,
     exerciseMuscle: DataTypes.STRING,
     exerciseDescription: DataTypes.TEXT,
+    apiId: DataTypes.INTEGER,
     exerciseLanguage: DataTypes.STRING
   }, {
     sequelize,

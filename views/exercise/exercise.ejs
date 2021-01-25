@@ -3,7 +3,6 @@
 <div class="exerciseList">
 <% exercise.forEach(function(exercise){ %>
     <% if(exercise.language != 1) {%>
-      <% console.log(exercise.id) %>
       <h2><a href="/exercise/<%= exercise.id %>/"><%= exercise.name %></a></h2>
     <% } %>
   <% }) %> 

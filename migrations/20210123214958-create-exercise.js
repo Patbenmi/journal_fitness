@@ -17,6 +17,9 @@ module.exports = {
       exerciseDescription: {
         type: Sequelize.TEXT
       },
+      apiId: {
+        type: Sequelize.INTEGER
+      },
       exerciseLanguage: {
         type: Sequelize.STRING
       },

@@ -18,18 +18,20 @@ router.get('/', isLoggedIn, (req, res) =>{
 })
 
 router.get('/:id', isLoggedIn, (req, res) =>{
-  const currentUrl = `https://wger.de/en/exercise/${req.params.id}/view/`
+  console.log("Blue")
+  const currentUrl = `https://wger.de/api/v2/exercise/${req.params.id}?format=json`
   axios.get(currentUrl, {
     withCredentials: true,
     headers: {
       "Authorization": API_KEY,
+      'Accept': 'application/json',
       "Content-Type": "application/json"
     }
   }).then(apiResponse => {
     let exercise = apiResponse.data
-    console.log(apiResponse.data)
+    console.log('Look Here!', apiResponse.data)
     // console.log(apiResponse.data.results)
-    res.render('exercise/favorite.ejs', {exercise})
+    res.render('exercise/search.ejs', {exercise})
   }).catch(error => console.log(error))
 })
 
@@ -45,8 +47,16 @@ router.post('/:id', isLoggedIn, (req, res) =>{
       exerciseLanguage: req.body.language
     }
   }).then(([exercise, wasCreated]) =>{
-    res.render('exercise/favorite', {exercise: exercise})
+    res.redirect('/exercise/favorite')
   }).catch(error => console.log(error))
+})
+router.get('/favorite', isLoggedIn, (req, res) =>{
+  db.exercise.findAll({
+    where: {
+      user_id: currentUser.id
+    }
+  })
+  .then(exercise)
 })
 
 module.exports = router
