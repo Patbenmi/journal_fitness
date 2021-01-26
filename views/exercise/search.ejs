@@ -21,3 +21,20 @@
   <input hidden type="text" name="exerciseLanguage" value="<%= exercise.language %>">
   <button class="btn btn-primary" type="submit">Add to Favorite Exercise List</button>
 </form>
+<form name="comment" method="POST" action="/exercise/<% exercise.id %> ">
+  <input hidden type="integer" name="userId" value="<%= user.id %>">
+  <input hidden type="integer" name="exerciseId" value="<%= exercise.id %>">
+
+  <label for="comment">Exercise Review. Please leave tips, comments or concerns</label>
+  <input type="text" name="comment">
+  <input type="submit">
+</form>
+<form name="submittedComments">
+  <label for="submittedComments">Here's what others had to say about this exercise</label>
+  <ol>
+    <% if(comment.exerciseId) %>
+    <% comment.comment.forEach(c =>{ %>
+    <li><%= user.name_first%> <%= user.name_last %><% comment.comment %> </li>> 
+    <% }) %>
+  </ol>
+</form>
