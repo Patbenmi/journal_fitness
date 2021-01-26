@@ -1,6 +1,7 @@
 <h1>Favorite Exercises</h1>
 
-<div class="exerciseList">
-  <%= exercise.apiId %>
-
-</div>
+<% exercises.forEach(exercise =>{ %>
+  <div class="exerciseList">
+    <%= exercise.apiId %>
+    </div>
+  <% }) %> 

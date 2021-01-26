@@ -4,7 +4,6 @@ const bcrypt = require('bcrypt')
 const {
   Model
 } = require('sequelize');
-const exercisecomment = require('./exercisecomment');
 module.exports = (sequelize, DataTypes) => {
   class user extends Model {
     /**
@@ -13,10 +12,10 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      models.user.hasMany(models.exercises, {through: 'userexercise'})
-      models.user.hasMany(models.comments, {through: 'exercisecomment'})
-      models.user.hasMany(models.workouts, {through: 'userworkout'})
-      models.user.hasMany(models.workoutcomment, {through: 'userworkout'})
+      models.user.hasMany(models.workoutcomment)
+      models.user.hasMany(models.workout)
+      models.user.hasMany(models.comment)
+      models.user.belongsToMany(models.exercise, {through: 'userExercises'})
     }
   };
   user.init({

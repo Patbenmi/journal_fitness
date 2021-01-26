@@ -17,6 +17,20 @@ router.get('/', isLoggedIn, (req, res) =>{
   })
 })
 
+router.get('/favorite', isLoggedIn, (req, res) =>{
+  console.log(req.user.id)
+  db.user.findOne({
+    where: {
+      id: req.user.id
+    }
+  }).then(user => {
+    user.getExercises().then(exercises =>{
+      res.render('./exercise/favorite', {exercises})
+    })
+  })
+  .catch(error => console.log(error))
+})
+
 router.get('/:id', isLoggedIn, (req, res) =>{
   console.log("Blue")
   const currentUrl = `https://wger.de/api/v2/exercise/${req.params.id}?format=json`
@@ -35,38 +49,27 @@ router.get('/:id', isLoggedIn, (req, res) =>{
   }).catch(error => console.log(error))
 })
 
-
 router.post('/:id', isLoggedIn, (req, res) =>{
   db.exercise.findOrCreate({
     where: {
       exerciseName: req.body.name,
-      exerciseMuscle: req.body.muscles,
-      exerciseDescription: req.body.description,
-      apiId: req.body.id,
-      exerciseLanguage: req.body.language
+      exerciseMuscle: req.body.exerciseMuscle,
+      exerciseDescription: req.body.exerciseDescription,
+      apiId: req.body.apiId,
+      exerciseLanguage: req.body.exerciseLanguage
     },
   }).then(([exercise, wasCreated]) =>{
-    console.log(exercise)
-    res.render('./exercise/favorite', {exercise})
+    db.user.findOne({
+      where: {
+        id: req.user.id
+      }
+    }).then(user => {
+      user.addExercise(exercise).then(relationshipinfo =>{
+        console.log(exercise)
+        res.redirect('/exercise/favorite')
+      })
+    })
   }).catch(error => console.log(error))
-})
-
-router.get('/favorite', isLoggedIn, (req, res) =>{
-  db.exercise.findAll().then(exercise =>{
-    res.render('./favorite', {exercise})
-  })
-})
-
-router.post('/search', isLoggedIn, (req, res) =>{
-  db.exercise.findOrCreate({
-    where: {
-      user_id: currentUser.id
-    }
-  })
-  .then(exercise =>{
-    res.render('/favorite', {exercise})
-  })
-  .catch(error => console.log(error))
 })
 
 module.exports = router

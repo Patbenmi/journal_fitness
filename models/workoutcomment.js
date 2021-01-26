@@ -10,9 +10,9 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
-      // models.workoutcomment.belongsTo(models.workouts, {through: 'userworkout'})
-      // models.workoutcomment.belongsTo(models.user, {through: 'userworkout'})
+      models.workoutComment.belongsTo(models.user)
+      models.workoutComment.belongsTo(models.workout)
+
     }
   };
   workoutComment.init({

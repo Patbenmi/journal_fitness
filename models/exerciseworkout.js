@@ -11,8 +11,6 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      // models.exerciseworkout.belongsTo(model.exercise)
-      // models.exerciseworkout.belongsTo(model.workouts)
     }
   };
   exerciseWorkout.init({
