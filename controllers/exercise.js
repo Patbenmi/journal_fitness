@@ -25,6 +25,7 @@ router.get('/favorite', isLoggedIn, (req, res) =>{
     }
   }).then(user => {
     user.getExercises().then(exercises =>{
+      console.log(exercises)
       res.render('./exercise/favorite', {exercises})
     })
   })
