@@ -8,15 +8,12 @@
   <% if(exercise.muscles.length > 0){ %>
     <li><%= exercise.muscles %></li>
   <% } %> 
-  <% if(exercise.muscles_secondary){ %>
+  <% if(exercise.muscles_secondary.length > 0){ %>
     <li><%= exercise.muscles_secondary %></li>
-  <% } %> 
-  <% if(exercise.variations){ %>
-    <li><%= exercise.variations %></li>
   <% } %> 
 </ul>
 
-<form method="POST" action="/exercise/<%= exercise.id %>">
+<form method="POST" action="/exercise/search">
   <input hidden type="text" name="name" value="<%= exercise.name %>">
   <button class="btn btn-primary" type="submit">Add to Favorite Exercise List</button>
 </form>

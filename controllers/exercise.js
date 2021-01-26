@@ -44,19 +44,30 @@ router.post('/:id', isLoggedIn, (req, res) =>{
     defaults:{
       exerciseMuscle: req.body.muscles,
       exerciseDescription: req.body.description,
+      apiId: req.body.id,
       exerciseLanguage: req.body.language
     }
   }).then(([exercise, wasCreated]) =>{
-    res.redirect('/exercise/favorite')
+    res.render('./exercise/favorite', {exercise})
   }).catch(error => console.log(error))
 })
+
 router.get('/favorite', isLoggedIn, (req, res) =>{
-  db.exercise.findAll({
+  db.exercise.findAll().then(exercise =>{
+    res.render('./favorite', {exercise})
+  })
+})
+
+router.post('/search', isLoggedIn, (req, res) =>{
+  db.exercise.findOrCreate({
     where: {
       user_id: currentUser.id
     }
   })
-  .then(exercise)
+  .then(exercise =>{
+    res.render('/favorite', {exercise})
+  })
+  .catch(error => console.log(error))
 })
 
 module.exports = router
