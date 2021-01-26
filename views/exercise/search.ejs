@@ -15,5 +15,9 @@
 
 <form method="POST" action="/exercise/search">
   <input hidden type="text" name="name" value="<%= exercise.name %>">
+  <input hidden type="text" name="exerciseMuscles" value="<%= exercise.muscles %>">
+  <input hidden type="text" name="exerciseDescription" value="<%= exercise.description %>">
+  <input hidden type="text" name="apiId" value="<%= exercise.id %>">
+  <input hidden type="text" name="language" value="<%= exercise.language %>">
   <button class="btn btn-primary" type="submit">Add to Favorite Exercise List</button>
 </form>

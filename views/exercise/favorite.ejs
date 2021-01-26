@@ -1,9 +1,6 @@
 <h1>Favorite Exercises</h1>
 
 <div class="exerciseList">
-  <% exercise.forEach(function(exercise){ %>
-      <% if(exercise.language != 1) {%>
-        <h2><a href="/exercise/<%= exercise.id %>/"><%= exercise.name %></a></h2>
-      <% } %>
-    <% }) %> 
-  </div>
+  <%= exercise.apiId %>
+
+</div>

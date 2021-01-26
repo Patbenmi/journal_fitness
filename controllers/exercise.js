@@ -39,15 +39,14 @@ router.get('/:id', isLoggedIn, (req, res) =>{
 router.post('/:id', isLoggedIn, (req, res) =>{
   db.exercise.findOrCreate({
     where: {
-      exerciseName: req.body.name
-    },
-    defaults:{
+      exerciseName: req.body.name,
       exerciseMuscle: req.body.muscles,
       exerciseDescription: req.body.description,
       apiId: req.body.id,
       exerciseLanguage: req.body.language
-    }
+    },
   }).then(([exercise, wasCreated]) =>{
+    console.log(exercise)
     res.render('./exercise/favorite', {exercise})
   }).catch(error => console.log(error))
 })
