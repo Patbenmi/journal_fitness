@@ -5,6 +5,7 @@ let db = require('../models')
 const passport = require('../config/ppConfig.js')
 const LocalStrategy = require('passport-local')
 const methodOverride = require('method-override')
+const isLoggedIn = require('../middleware/isLoggedIn')
 
 router.get('/signup', (req, res) =>{
   res.render('auth/signUp.ejs')
@@ -60,6 +61,11 @@ router.get('/login', (req, res) =>{
 //     res.send('There was an error logging in. Check the console?')
 //   })
 // })
+
+router.get('/update', isLoggedIn, (req, res) =>{
+  res.render('auth/update.ejs')
+})
+
 router.post('/login', passport.authenticate('local', {
   failureRedirect: '/auth/login',
   successRedirect: '/',

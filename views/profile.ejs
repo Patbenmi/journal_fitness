@@ -15,7 +15,7 @@
 <h2><%= currentUser.name_first %>'s gender: <%= currentUser.gender %></h2>
 
 <h2><%= currentUser.name_first %>'s email address: <%= currentUser.email %></h2>
-<form action="/auth/update">
-  <label for="updateButton">Information out-of-date? Click the button below to update your profile.</label>
+<form action="/auth/update" method="GET">
+  <label for="updateButton">Information out-of-date? Click the button to the right to update your profile.</label>
   <input name="updateButton" type="submit" value="Update"></input>
 </form>
