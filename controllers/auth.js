@@ -30,7 +30,6 @@ router.post('/signup', (req, res) =>{
         successRedirect: '/',
         successFlash: 'Account created and user logged in',
       })(req, res)
-      // res.send(`Created a new user profile for ${user.email}`)
     } else {
       req.flash('error', `Account alreaedy exists! Try logging in.`)
       res.redirect('/auth/login')
@@ -66,6 +65,27 @@ router.get('/update', isLoggedIn, (req, res) =>{
   res.render('auth/update.ejs')
 })
 
+router.put('/update/:id', isLoggedIn, (req, res) =>{
+  db.user.findByPk(req.user.id)
+  .then(userInfo =>{
+    db.user.update({
+        name_first: req.body.name_first,
+        name_last: req.body.name_last,
+        gender: req.body.gender,
+        language: req.body.language,
+        email: req.body.email
+    }, {
+      where: {
+        id: req.user.id
+      }
+    })
+    .then(updatedInformation =>{
+      console.log('Cherry Pie', updatedInformation)
+      res.redirect('/profile')
+    })
+  })
+})
+
 router.post('/login', passport.authenticate('local', {
   failureRedirect: '/auth/login',
   successRedirect: '/',
@@ -76,7 +96,7 @@ router.post('/login', passport.authenticate('local', {
 router.get('/logout', (req, res) =>{
   req.logOut()
   res.redirect('/')
-  // res.send('You are now logged out. Have a nice day!')
+  successFlash: 'You are now logged out. Have a nice day!'
 })
 
 module.exports = router

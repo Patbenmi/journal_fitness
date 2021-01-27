@@ -1,27 +1,27 @@
 <h1>Update your profile information here, <%= currentUser.name_first %>.</h1>
 
 <ul class="unstyled">
-<form action="/auth/update/?_method=UPDATE" method="POST">
-  <li><label for="update-name_first">First Name</label>
+<form action="/auth/update/<%= currentUser.id %>/?_method=PUT" method="POST">
+  <li><label for="update-name_first">First Name: </label>
   <input type="text" name="name_first" id="update-name_first" value="<%= currentUser.name_first %>"></li>
-  <label for="update-name_last">Last name</label>
+  <label for="update-name_last">Last Name: </label>
   <input type="text" name="name_last" id="update-name_last" value="<%= currentUser.name_last %>"></li>
 
-  <li><label for="update-gender">Gender:</label>
-  <label for="update-male">Male</label>
+  <li><label for="update-gender">Gender: </label>
+  <label for="update-male">Male: </label>
   <input type="radio" name="gender" value="Male"id="update-male">
-  <label for="update-nonbinary">Non-Binary</label>
+  <label for="update-nonbinary">Non-Binary: </label>
   <input type="radio" name="gender" value="Non-Binary" id="update-nonbinary">
-  <label for="update-female">Female</label>
+  <label for="update-female">Female: </label>
   <input type="radio" name="gender" value="Female" id="update-female"></li>
 
-  <li><label for="update-language">Language:</label>
-  <label for="update-english">English</label>
+  <li><label for="update-language">Language: </label>
+  <label for="update-english">English: </label>
   <input type="radio" name="language" value="2" id="update-english">
-  <label for="update-german">Deutsch</label>
+  <label for="update-german">Deutsch: </label>
   <input type="radio" name="language" value="1" id="update-german"></li>
 
-  <li><label for="update-language">Email Address</label>
+  <li><label for="update-language">Email Address: </label>
   <input type="email" name="email" for="update-email"></li>
 
   <input type="submit" value="Update Profile">
