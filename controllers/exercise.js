@@ -33,20 +33,21 @@ router.get('/favorite', isLoggedIn, (req, res) => {
     .catch(error => console.log(error))
 })
 
-router.delete('/favorite', isLoggedIn, (req, res) => {
-  console.log('Blueberry', req.body)
-  db.userExercise.destroy({
-    where: {
-      id: req.body.id
-    },
-    defaults: {
-      userId: req.user.id
-    }
-  }).then(deletedComment => {
-    console.log(deletedComment)
-    res.redirect('/exercise/favorite')
+router.delete('/favorite/:id', isLoggedIn, (req, res) => {
+  console.log('Blueberry', req.params)
+  db.exercise.findByPk(req.params.id, { include: [db.user] })
+  .then(() => {
+    db.exercise.destroy({
+      where: {
+        apiId: req.params.id
+      },
     })
   })
+  .then(deletedComment => {
+    console.log(deletedComment)
+    res.redirect('/exercise/favorite')
+  })
+})
 
 router.get('/:id', isLoggedIn, (req, res) => {
   console.log("Blue")
@@ -65,13 +66,13 @@ router.get('/:id', isLoggedIn, (req, res) => {
     console.log("chicken wing", exerciseData)
     db.comment.findAll({
       where: {
-        exerciseId: exerciseData.id, 
+        exerciseId: exerciseData.id,
       }
-  }).then(comments => {
+    }).then(comments => {
       console.log("green beans", comments)
       res.render('exercise/search.ejs', { exercise: exerciseData, comment: comments })
     })
-    .catch(error => console.log(error))
+      .catch(error => console.log(error))
   })
 })
 
@@ -106,7 +107,7 @@ router.post('/:id/comment', isLoggedIn, (req, res) => {
     .catch(error => console.log(error))
 })
 
-router.delete('/:id/comment', isLoggedIn, (req, res) =>{
+router.delete('/:id/comment', isLoggedIn, (req, res) => {
   console.log(req.body)
   console.log(req.body.commentId)
   db.comment.destroy({
@@ -115,12 +116,12 @@ router.delete('/:id/comment', isLoggedIn, (req, res) =>{
       exerciseId: req.body.exerciseId
     }
   })
-  .then(deletedComment =>{
-    console.log(deletedComment)
-    res.redirect('/exercise/'+ req.body.exerciseId)
+    .then(deletedComment => {
+      console.log(deletedComment)
+      res.redirect('/exercise/' + req.body.exerciseId)
       msg: 'comment deleted'
-  })
-  .catch(error => console.log(error))
+    })
+    .catch(error => console.log(error))
 })
 
 
