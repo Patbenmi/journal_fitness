@@ -30,23 +30,27 @@ router.get('/favorite', isLoggedIn, (req, res) => {
       res.render('./exercise/favorite', { exercises, user })
     })
   })
-    .catch(error => console.log(error))
+  .catch(error => console.log(error))
 })
 
 router.delete('/favorite/:id', isLoggedIn, (req, res) => {
   console.log('Blueberry', req.params)
-  db.exercise.findByPk(req.params.id, { include: [db.user] })
-  .then(() => {
-    db.exercise.destroy({
+  db.user.findByPk(req.user.id, { include: [db.exercise] })
+  .then(userInfo => {
+    console.log(userInfo)
+    db.exercise.findOne({
       where: {
-        apiId: req.params.id
-      },
+        id: req.params.id
+      }
+    })
+    .then(exercise =>{
+      userInfo.removeExercise(exercise)
+      .then(()=>{
+        res.redirect('/exercise/favorite')
+      })
     })
   })
-  .then(deletedComment => {
-    console.log(deletedComment)
-    res.redirect('/exercise/favorite')
-  })
+  .catch(error => console.log(error))
 })
 
 router.get('/:id', isLoggedIn, (req, res) => {
@@ -72,7 +76,7 @@ router.get('/:id', isLoggedIn, (req, res) => {
       console.log("green beans", comments)
       res.render('exercise/search.ejs', { exercise: exerciseData, comment: comments })
     })
-      .catch(error => console.log(error))
+    .catch(error => console.log(error))
   })
 })
 

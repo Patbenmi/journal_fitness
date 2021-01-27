@@ -4,6 +4,7 @@ let router = express.Router()
 let db = require('../models')
 const passport = require('../config/ppConfig.js')
 const LocalStrategy = require('passport-local')
+const methodOverride = require('method-override')
 
 router.get('/signup', (req, res) =>{
   res.render('auth/signUp.ejs')
