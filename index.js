@@ -7,6 +7,7 @@ const session = require('express-session')
 const passport = require('./config/ppConfig.js')
 const flash = require('connect-flash')
 const isLoggedIn = require('./middleware/isLoggedIn.js')
+const methodOverride = require('method-override')
 
 //set the view engine to ejs
 app.set('view engine', 'ejs')
@@ -14,6 +15,7 @@ app.set('view engine', 'ejs')
 app.use(ejsLayouts)
 //body parser middleware allows us to receive form data in req.body
 app.use(express.urlencoded({extended: false}))
+app.use(methodOverride('_method'))
 //session middleware
 app.use(session({
   secret: process.env.SESSION_SECRET,
@@ -31,6 +33,7 @@ app.use((req, res, next) =>{
   res.locals.currentUser = req.user
   next() // move on the next piece of middleware
 })
+
 // controller middleware
 app.use('/auth', require('./controllers/auth'))
 app.use('/exercise', require('./controllers/exercise'))

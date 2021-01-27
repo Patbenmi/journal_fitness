@@ -5,7 +5,8 @@
   <div class="exerciseList">
     <li>
       <a href="/exercise/<%= exercise.apiId %> "><%= exercise.exerciseName %></a>
-      <form action="/exercise/<%= exercise.apiId %>/?_method=DELETE" method="POST">
+      <form action="/exercise/favorite/?_method=DELETE" method="POST">
+        <input hidden type="integer" name="id" value="<% exercise.apiId %> ">
         <input type="submit" value="Delete Exercise">
       </form>
     </li>

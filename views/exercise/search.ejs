@@ -29,19 +29,17 @@
   <input type="text" name="comment">
   <input type="submit">
 </form>
-<form name="submittedComments">
-  <label for="submittedComments">Here's what others had to say about this exercise</label>
-  <ol>
-    <% if(comment) { %>
-    <% comment.forEach(myComment =>{ %>
-      <li><%= currentUser.name_first %>, <%= currentUser.name_last %>, <%= myComment.comment %></li>>
-      <form action="/exercise/<%= exercise.id %>/comment" method="PUT">
-        <input type="submit" value="Update">
-      </form>
-      <form action="/exercise/<%= exercise.id%>/comment/?_method=DELETE" method="POST">
-        <input type="submit" value="Delete">
-      </form>
-    <% }) %>
-  <% } %> 
-  </ol>
-</form>
+
+<h3>Here's what others had to say about this exercise</h3>
+<ol>
+  <% if(comment) { %>
+  <% comment.forEach(myComment =>{ %>
+    <li><%= currentUser.name_first %> <%= currentUser.name_last %>, <%= myComment.comment %></li>
+    <form action="/exercise/<%= exercise.id%>/comment/?_method=DELETE" method="POST">
+      <input hidden type="integer" name="exerciseId" value="<%= exercise.id %>">
+      <input hidden type="integer" name="commentId" value="<%= myComment.id%>">
+      <input type="submit" value="Delete">
+    </form>
+  <% }) %>
+<% } %>
+</ol>
