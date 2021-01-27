@@ -3,7 +3,12 @@
 <ol></ol>
 <% exercises.forEach(exercise =>{ %>
   <div class="exerciseList">
-    <li><a href="/exercise/<%= exercise.apiId %> "><%= exercise.exerciseName %></a></li>
+    <li>
+      <a href="/exercise/<%= exercise.apiId %> "><%= exercise.exerciseName %></a>
+      <form action="/exercise/<%= exercise.apiId %>/?_method=DELETE" method="POST">
+        <input type="submit" value="Delete Exercise">
+      </form>
+    </li>
     </div>
   <% }) %> 
 </ol>
