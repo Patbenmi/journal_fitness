@@ -11,13 +11,9 @@
     <nav>
       <ul>
         <% if(!currentUser) { %>
-          <li><a href="/auth/signUp">Sign Up</a></li>
-          <li><a href="/auth/logIn">Log In</a></li>
+          <h3><a href="/auth/signUp">Sign Up</a>   <a href="/auth/logIn">Log In</a></h3>
         <% } else { %>
-          <li><a href="/auth/logOut">Log Out</a></li>
-          <li><a href="/profile">Profile</a></li>
-          <li><a href="/exercise">Exercise Search</a></li>
-          <li><a href="/exercise/favorite">Favorite Exercises</a></li>
+          <h3><a href="/auth/logOut">Log Out</a>   <a href="/profile">Profile</a>   <a href="/exercise">Exercise Search</a>   <a href="/exercise/favorite">Favorite Exercises</a></h3>
         <% } %>
       </ul>
     </nav>
