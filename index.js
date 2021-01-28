@@ -16,6 +16,7 @@ app.use(ejsLayouts)
 //body parser middleware allows us to receive form data in req.body
 app.use(express.urlencoded({extended: false}))
 app.use(methodOverride('_method'))
+app.use(express.static(__dirname + '/public'))
 //session middleware
 app.use(session({
   secret: process.env.SESSION_SECRET,

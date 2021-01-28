@@ -1,15 +1,67 @@
 <h1>Exercise Search</h1>
 
-<%= exercise.name %> 
+<% function muscleName(e) { %>
+  <% e.forEach(muscle =>{ %>
+    <% if(muscle == 1){ %>
+      <% muscle = 'Biceps Brachii' %>
+      -<%= muscle %>
+    <% } else if(muscle == 2){ %>
+      <% muscle = 'Anterior Deltoids' %>
+      -<%= muscle %>
+    <% } else if(muscle == 3){ %>
+      <% muscle = 'Serratus Anterior' %>
+      -<%=  muscle %>
+    <% } else if(muscle == 4){ %>
+      <% muscle = 'Pectoralis Major' %>
+      -<%=  muscle %>
+    <% } else if(muscle == 5){ %>
+      <% muscle = 'Triceps Brachii' %>
+      -<%=  muscle %>
+    <% } else if(muscle == 6){ %>
+      <% muscle = 'Rectus Abdominus' %>
+      -<%=  muscle %>
+    <% } else if(muscle == 7){ %>
+      <% muscle = 'Gastrocnemius' %>
+      -<%=  muscle %>
+    <% } else if(muscle == 8){ %>
+      <% muscle = 'Gluteus Maximus' %>
+      -<%=  muscle %>
+    <% } else if(muscle == 9){ %>
+      <% muscle = 'Trapezius' %>
+      -<%=  muscle %>
+    <% } else if(muscle == 10){ %>
+      <% muscle = 'Quadraceps Femoris' %>
+      -<%=  muscle %>
+    <% } else if(muscle == 11){ %>
+      <% muscle = 'Biceps Femoris' %>
+      -<%=  muscle %>
+    <% } else if(muscle == 12){ %>
+      <% muscle = 'Latissimus Dorsi' %>
+      -<%=  muscle %>
+    <% } else if(muscle == 13){ %>
+      <% muscle = 'Brachialis' %>
+      -<%=  muscle %>
+    <% } else if(muscle == 14){ %>
+      <% muscle = 'Obliques Externus Abdominus' %>
+      -<%=  muscle %>
+    <% } else if(muscle == 15){ %>
+      <% muscle = 'Soleus' %>
+      -<%=  muscle %>
+      <% } %>
+  <% }) %>
+<% } %> 
+
+<h2><%= exercise.name %></h2>
+
 <ul>
   <% if(exercise.description){ %>
-    <li><%- exercise.description %></li>
+    <h4><%- exercise.description %></h4>
   <% } %> 
   <% if(exercise.muscles.length > 0){ %>
-    <li><%= exercise.muscles %></li>
+    <h5>Primary Muscles: <% muscleName(exercise.muscles) %></h5>
   <% } %> 
   <% if(exercise.muscles_secondary.length > 0){ %>
-    <li><%= exercise.muscles_secondary %></li>
+    <h5>Secondary Muscles: <% muscleName(exercise.muscles_secondary) %></h5>
   <% } %> 
 </ul>
 

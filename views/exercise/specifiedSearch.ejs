@@ -1,0 +1,72 @@
+<h1>Search for Exercises</h1>
+function muscleName(e){
+  e.forEach(muscle =>{
+  if(e == 2){
+    <%= Anterior Deltoid %>
+  }
+})
+
+}
+<% function muscleName(e){ %>
+  <% e.forEach(muscle =>{ %>
+    <% if(e == 2){ %>
+    <%= Anterior Deltoid %>
+    <% } %>
+  <% }) %>
+<% } %>
+<% muscleName(exercise.muscles) %> 
+<% muscleName(exercise.muscles_secondary) %> 
+
+<% function muscleName(e) { %>
+  <% e.forEach(muscle =>{ %>
+    <% if(e ==2){ %>
+      <% muscle = Anterior Deltoids %>
+    <% } %>
+    <%= muscle %>
+  <% }) %>
+<% } %> 
+
+<% } else if(muscle == 2){ %>
+  <% muscle = 'Anterior Deltoids' %>
+<% } else if(muscle == 3){ %>
+  <% muscle = 'Serratus Anterior' %>
+<% } else if(muscle == 4){ %>
+  <% muscle = 'Pectoralis Major' %>
+<% } else if(muscle == 5){ %>
+  <% muscle = 'Triceps Brachii' %>
+<% } else if(muscle == 6){ %>
+  <% muscle = 'Rectus Abdominus' %>
+<% } else if(muscle == 7){ %>
+  <% muscle = 'Gastrocnemius' %>
+<% } else if(muscle == 8){ %>
+  <% muscle = 'Gluteus Maximus' %>
+<% } else if(muscle == 9){ %>
+  <% muscle = 'Trapezius' %>
+<% } else if(muscle == 10){ %>
+  <% muscle = 'Quadraceps Femoris' %>
+<% } else if(muscle == 11){ %>
+  <% muscle = 'Biceps Femoris' %>
+<% } else if(muscle == 12){ %>
+  <% muscle = 'Latissimus Dorsi' %>
+<% } else if(muscle == 13){ %>
+  <% muscle = 'Brachialis' %>
+<% } else if(muscle == 14){ %>
+  <% muscle = 'Obliques Externus Abdominus' %>
+<% } else if(muscle == 15){ %>
+  <% muscle = 'Soleus' %>
+
+  <% } else if(muscle == 11){ %>
+    <% muscle = 'Biceps Femoris' %>
+    <%= muscle %>
+  <% } else if(muscle == 12){ %>
+    <% muscle = 'Latissimus Dorsi' %>
+    <%= muscle %>
+  <% } else if(muscle == 13){ %>
+    <% muscle = 'Brachialis' %>
+    <%= muscle %>
+  <% } else if(muscle == 14){ %>
+    <% muscle = 'Obliques Externus Abdominus' %>
+    <%= muscle %>
+  <% } else if(muscle == 15){ %>
+    <% muscle = 'Soleus' %>
+    <%= muscle %>
