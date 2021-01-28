@@ -1,5 +1,4 @@
 let express = require('express')
-// const { in } = require('sequelize/types/lib/operators')
 let router = express.Router()
 let db = require('../models')
 const passport = require('../config/ppConfig.js')
@@ -44,22 +43,6 @@ router.post('/signup', (req, res) =>{
 router.get('/login', (req, res) =>{
   res.render('auth/logIn.ejs')
 })
-
-// router.post('/login', (req, res) =>{
-//   db.user.findOne({
-//     where: {
-//       email: req.body.email,
-//       password: req.body.password
-//     }
-//   })
-//   .then(foundUser =>{
-//     res.send(`Logged in the following user: ${foundUser.name}`)
-//   })
-//   .catch(err=>{
-//     console.log(err)
-//     res.send('There was an error logging in. Check the console?')
-//   })
-// })
 
 router.get('/update', isLoggedIn, (req, res) =>{
   res.render('auth/update.ejs')
