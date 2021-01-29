@@ -13,7 +13,6 @@ const methodOverride = require('method-override')
 router.get('/', isLoggedIn, (req, res) => {
   axios.get(wgerUrl).then(apiResponse => {
     let exercise = apiResponse.data.results
-    console.log(apiResponse.data.results)
     res.render('exercise/exercise', { exercise: exercise.slice(0, 408) })
   })
 })
@@ -90,7 +89,6 @@ router.post('/:id', isLoggedIn, (req, res) => {
       }
     }).then(user => {
       user.addExercise(exercise).then(relationshipinfo => {
-        console.log(exercise)
         req.flash('error','An exercise has been added to your favorited exercise page.')
         res.redirect('/exercise/favorite')
       })

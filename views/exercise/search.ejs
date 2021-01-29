@@ -75,9 +75,7 @@
 </form>
 <form name="comment" method="POST" action="/exercise/<%= exercise.id %>/comment">
   <input hidden type="integer" name="userId" value="<%= currentUser.id %>">
-  <% console.log("Beef", currentUser.id) %> 
   <input hidden type="integer" name="exerciseId" value="<%= exercise.id %>">
-  <% console.log("Pork", exercise.id) %> 
   <label for="comment">Exercise Review. Please leave tips, comments or concerns</label>
   <input type="text" name="comment">
   <input type="submit">
@@ -87,9 +85,7 @@
 <ol>
   <% if(comment) { %>
   <% comment.forEach(myComment =>{ %>
-    <% console.log("turkey", myComment.userId) %> 
-    <li><%= currentUser.name_first %> <%= currentUser.name_last %>, <%= myComment.comment %></li>
-    <% console.log("brownies", currentUser.id) %> 
+    <li><%= currentUser.name_first %> <%= currentUser.name_last %>: <%= myComment.comment %></li>
     <% if(currentUser.id === myComment.userId){ %>
       <form action="/exercise/<%= exercise.id%>/comment/?_method=DELETE" method="POST">
         <input hidden type="integer" name="exerciseId" value="<%= exercise.id %>">
