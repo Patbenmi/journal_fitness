@@ -41,11 +41,6 @@ app.use('/exercise', require('./controllers/exercise'))
 app.use('/workout', require('./controllers/workout'))
 
 app.get('/', (req, res) =>{
-  // if(req.user){
-  //   res.render(`req.user: ${req.user.name}`)
-  // } else {
-  //   res.send('No user is currently logged in')
-  // }
   res.render('home')
 })
 

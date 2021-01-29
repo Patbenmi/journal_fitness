@@ -19,14 +19,12 @@ router.get('/', isLoggedIn, (req, res) => {
 })
 
 router.get('/favorite', isLoggedIn, (req, res) => {
-  console.log(req.user.id)
   db.user.findOne({
     where: {
       id: req.user.id
     },
   }).then(user => {
     user.getExercises().then(exercises => {
-      console.log("Pumpkin Pie", exercises)
       res.render('./exercise/favorite', { exercises, user })
     })
   })
@@ -34,10 +32,8 @@ router.get('/favorite', isLoggedIn, (req, res) => {
 })
 
 router.delete('/favorite/:id', isLoggedIn, (req, res) => {
-  console.log('Blueberry', req.params)
   db.user.findByPk(req.user.id, { include: [db.exercise] })
   .then(userInfo => {
-    console.log(userInfo)
     db.exercise.findOne({
       where: {
         id: req.params.id
@@ -46,6 +42,7 @@ router.delete('/favorite/:id', isLoggedIn, (req, res) => {
     .then(exercise =>{
       userInfo.removeExercise(exercise)
       .then(()=>{
+        req.flash('error','An exercise has been deleted from your favorites.')
         res.redirect('/exercise/favorite')
       })
     })
@@ -54,7 +51,6 @@ router.delete('/favorite/:id', isLoggedIn, (req, res) => {
 })
 
 router.get('/:id', isLoggedIn, (req, res) => {
-  console.log("Blue")
   let exerciseData;
   const currentUrl = `https://wger.de/api/v2/exercise/${req.params.id}?format=json`
   axios.get(currentUrl, {
@@ -67,13 +63,11 @@ router.get('/:id', isLoggedIn, (req, res) => {
   }).then(apiResponse => {
     exerciseData = apiResponse.data
   }).then(() => {
-    console.log("chicken wing", exerciseData)
     db.comment.findAll({
       where: {
         exerciseId: exerciseData.id,
       }
     }).then(comments => {
-      console.log("green beans", comments)
       res.render('exercise/search.ejs', { exercise: exerciseData, comment: comments })
     })
     .catch(error => console.log(error))
@@ -97,6 +91,7 @@ router.post('/:id', isLoggedIn, (req, res) => {
     }).then(user => {
       user.addExercise(exercise).then(relationshipinfo => {
         console.log(exercise)
+        req.flash('error','An exercise has been added to your favorited exercise page.')
         res.redirect('/exercise/favorite')
       })
     })
@@ -105,15 +100,13 @@ router.post('/:id', isLoggedIn, (req, res) => {
 
 router.post('/:id/comment', isLoggedIn, (req, res) => {
   db.comment.create(req.body).then((comments) => {
-    console.log(comments)
+    req.flash('error','Your comment has been posted below.')
     res.redirect('/exercise/' + req.body.exerciseId)
   })
     .catch(error => console.log(error))
 })
 
 router.delete('/:id/comment', isLoggedIn, (req, res) => {
-  console.log(req.body)
-  console.log(req.body.commentId)
   db.comment.destroy({
     where: {
       id: req.body.commentId,
@@ -121,9 +114,8 @@ router.delete('/:id/comment', isLoggedIn, (req, res) => {
     }
   })
     .then(deletedComment => {
-      console.log(deletedComment)
+      req.flash('error','Your comment has been deleted.')
       res.redirect('/exercise/' + req.body.exerciseId)
-      msg: 'comment deleted'
     })
     .catch(error => console.log(error))
 })

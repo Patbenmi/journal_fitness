@@ -26,7 +26,7 @@ router.post('/signup', (req, res) =>{
   .then(([user, wasCreated]) =>{
     if(wasCreated){
       passport.authenticate('local', {
-        successRedirect: '/',
+        successRedirect: '/profile',
         successFlash: 'Account created and user logged in',
       })(req, res)
     } else {
@@ -63,7 +63,7 @@ router.put('/update/:id', isLoggedIn, (req, res) =>{
       }
     })
     .then(updatedInformation =>{
-      console.log('Cherry Pie', updatedInformation)
+      req.flash('error','Your profile has been updated.')
       res.redirect('/profile')
     })
   })
@@ -71,15 +71,15 @@ router.put('/update/:id', isLoggedIn, (req, res) =>{
 
 router.post('/login', passport.authenticate('local', {
   failureRedirect: '/auth/login',
-  successRedirect: '/',
+  successRedirect: '/profile',
   successFlash: "You are now logged in.",
   failureFlash: 'Invalid email or password.'
 }))
 
 router.get('/logout', (req, res) =>{
   req.logOut()
+  req.flash('error','You are now logged out. Have a nice day!')
   res.redirect('/')
-  successFlash: 'You are now logged out. Have a nice day!'
 })
 
 module.exports = router
