@@ -27,26 +27,26 @@ router.get('/favorite', isLoggedIn, (req, res) => {
       res.render('./exercise/favorite', { exercises, user })
     })
   })
-  .catch(error => console.log(error))
+    .catch(error => console.log(error))
 })
 
 router.delete('/favorite/:id', isLoggedIn, (req, res) => {
   db.user.findByPk(req.user.id, { include: [db.exercise] })
-  .then(userInfo => {
-    db.exercise.findOne({
-      where: {
-        id: req.params.id
-      }
-    })
-    .then(exercise =>{
-      userInfo.removeExercise(exercise)
-      .then(()=>{
-        req.flash('error','An exercise has been deleted from your favorites.')
-        res.redirect('/exercise/favorite')
+    .then(userInfo => {
+      db.exercise.findOne({
+        where: {
+          id: req.params.id
+        }
       })
+        .then(exercise => {
+          userInfo.removeExercise(exercise)
+            .then(() => {
+              req.flash('error', 'An exercise has been deleted from your favorites.')
+              res.redirect('/exercise/favorite')
+            })
+        })
     })
-  })
-  .catch(error => console.log(error))
+    .catch(error => console.log(error))
 })
 
 router.get('/:id', isLoggedIn, (req, res) => {
@@ -67,11 +67,12 @@ router.get('/:id', isLoggedIn, (req, res) => {
         exerciseId: exerciseData.id,
       }
     }).then(comments => {
-      res.render('exercise/search.ejs', { exercise: exerciseData, comment: comments })
+        res.render('exercise/search.ejs', { exercise: exerciseData, comment: comments})
+      })
+        .catch(error => console.log(error))
     })
-    .catch(error => console.log(error))
   })
-})
+
 
 router.post('/:id', isLoggedIn, (req, res) => {
   db.exercise.findOrCreate({
@@ -89,7 +90,7 @@ router.post('/:id', isLoggedIn, (req, res) => {
       }
     }).then(user => {
       user.addExercise(exercise).then(relationshipinfo => {
-        req.flash('error','An exercise has been added to your favorited exercise page.')
+        req.flash('error', 'An exercise has been added to your favorited exercise page.')
         res.redirect('/exercise/favorite')
       })
     })
@@ -98,7 +99,7 @@ router.post('/:id', isLoggedIn, (req, res) => {
 
 router.post('/:id/comment', isLoggedIn, (req, res) => {
   db.comment.create(req.body).then((comments) => {
-    req.flash('error','Your comment has been posted below.')
+    req.flash('error', 'Your comment has been posted below.')
     res.redirect('/exercise/' + req.body.exerciseId)
   })
     .catch(error => console.log(error))
@@ -112,7 +113,7 @@ router.delete('/:id/comment', isLoggedIn, (req, res) => {
     }
   })
     .then(deletedComment => {
-      req.flash('error','Your comment has been deleted.')
+      req.flash('error', 'Your comment has been deleted.')
       res.redirect('/exercise/' + req.body.exerciseId)
     })
     .catch(error => console.log(error))
